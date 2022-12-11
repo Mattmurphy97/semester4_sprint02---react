@@ -9,6 +9,7 @@ class ListEmployeeComponent extends Component {
         this.state = {
             employees: []
         }
+        this.addEmployee = this.addEmployee.bind(this)
     }
 
     componentDidMount(){
@@ -16,10 +17,22 @@ class ListEmployeeComponent extends Component {
             this.setState({ employees: res.data })
         })
     }
+
+    // Basically provides the histroy (URL) from its prop, so this method pushes this URL 
+    // to redirect us to the "add employee" page. (manually control the history of the "browser")
+    addEmployee(){
+        this.props.history.push('/add-employee')
+    }
+
     render(){
         return (
             <div>
+
                 <h2 className='text-center'>Employee List</h2>
+                <div className='row'>
+                    {/* onClick will run our addEmployee above  */}
+                    <button className='btn btn-primary' onClick={this.addEmployee}>Add Employee</button>
+                </div>
                 <div className='row'>
                     <table className='table table-striped table-bordered'>
                         <thead>
