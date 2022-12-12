@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, {Component} from "react"
 import EmployeeService from '../service/EmployeeService'
 
-
-class CreateEmployeeComponent extends Component {
+class UpdateEmployeeComponent extends Component {
     constructor(props) {
         super(props)
 
         // the fields inside our state allows react to make the connection to the values
         // within our form
         this.state = {
+            id: this.props.match.params.id,
             firstName: '',
             lastName: '',
             emailId: ''
@@ -18,10 +18,21 @@ class CreateEmployeeComponent extends Component {
         // as long as its a class component
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this)
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this)
-        this.saveEmployee = this.saveEmployee.bind(this)
+        this.updateEmployee = this.updateEmployee.bind(this)
     }
 
-    saveEmployee = (e) => {
+    componentDidMount(){
+        EmployeeService.getEmployeeById(this.state.id).then( (res) =>{
+            let employee = res.data;
+            this.setState({
+                firstName: employee.firstName, 
+                lastName: employee.lastName,
+                emailId: employee.emailId,
+            })
+        } );
+    }
+
+    updateEmployee = (e) => {
         e.preventDefault()
         
         let employee = {firstName: this.state.firstName,
@@ -31,7 +42,7 @@ class CreateEmployeeComponent extends Component {
         
         EmployeeService.createEmployee(employee).then(res => {
             window.location.reload(false)
-             alert("Employee saved to database")
+             alert("Employee Updated in Database")
         })
         
     }
@@ -89,7 +100,7 @@ class CreateEmployeeComponent extends Component {
                                             onChange={this.changeEmailHandler} />
                                         </div>
 
-                                        <button className='btn btn-success' onClick={this.saveEmployee} >Save</button>
+                                        <button className='btn btn-success' onClick={this.updateEmployee} >Save</button>
                                         
                                         <button className='btn btn-danger'  onClick={this.cancel.bind(this)}>Cancel</button>
                                         
@@ -103,4 +114,4 @@ class CreateEmployeeComponent extends Component {
     }
 }
 
-export default CreateEmployeeComponent
+export default UpdateEmployeeComponent

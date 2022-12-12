@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import EmployeeService from '../service/EmployeeService';
+
 
 
 class ListEmployeeComponent extends Component {
@@ -10,6 +12,11 @@ class ListEmployeeComponent extends Component {
             employees: []
         }
         this.addEmployee = this.addEmployee.bind(this)
+        this.editEmployee = this.editEmployee.bind(this)
+    }
+
+    editEmployee(id){
+        <Link to="/update-employee/${id}"> </Link>
     }
 
     componentDidMount(){
@@ -26,13 +33,7 @@ class ListEmployeeComponent extends Component {
 
     render(){
         return (
-            <div>
-
-                <h2 className='text-center'>Employee List</h2>
-                <div className='row'>
-                    {/* onClick will run our addEmployee above  */}
-                    <button className='btn btn-primary' onClick={this.addEmployee}>Add Employee</button>
-                </div>
+            
                 <div className='row'>
                     <table className='table table-striped table-bordered'>
                         <thead>
@@ -50,6 +51,11 @@ class ListEmployeeComponent extends Component {
                                         <td> {employee.firstName} </td>
                                         <td> {employee.lastName} </td>
                                         <td> {employee.emailId} </td>
+                                        <td>
+                                            <Link to="/update-employee/${id}">
+                                                <button onClick={()=> this.editEmployee(employee.id)} className="btn btn-primary">Update</button>
+                                            </Link>
+                                        </td>
 
                                     </tr>
                                 )
@@ -58,7 +64,6 @@ class ListEmployeeComponent extends Component {
 
                     </table>
                 </div>
-            </div>
         )
     }
 }

@@ -47,3 +47,12 @@
   text-align: center;
   color: white;
 }
+
+#button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#button-props {
+  width: 400px;
+}
