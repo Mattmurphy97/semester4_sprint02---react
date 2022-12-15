@@ -1,37 +1,33 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom" 
-import ListEmployeeComponent from './components/ListEmployeeComponent';
-import HeaderComponent from './components/HeaderComponent';
-import FooterComponent from './components/FooterComponent';
-import CreateEmployeeComponent from './components/CreateEmployeeConponent';
+import ListEmployeeComponent from './Components/ListEmployeeComponent';
+import HeaderComponent from './Components/HeaderComponent';
+import FooterComponent from './Components/FooterComponent';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CreateEmployeeComponent from './Components/CreateEmployeeComponent';
+import UpdateEmployeeComponent from './Components/UpdateEmployeeComponent';
+import ViewEmployeeComponent from './Components/ViewEmployeeComponent';
 
 function App() {
   return (
     <div>
       <Router>
-      
-        <nav className='nav-container'>
-        <HeaderComponent />
-          <h1 className='text-center'>Employee List</h1>
+        <HeaderComponent /> 
+        <div className='container'>
           
-          <div id='button-container'>
-            <Link to="/add-employee"><button className='btn btn-primary' id='button-props'>Add Employee</button></Link>
-            {/* <Link to="/update-employee"><button className='btn btn-primary' id='button-props'>Update Employee</button></Link> */}
+          <div className = "container">
+          
+            <Switch>
+              <Route path="/" exact component={ListEmployeeComponent}></Route>
+              <Route path="/employees" component={ListEmployeeComponent}></Route>
+              <Route path="/add-employee" component={CreateEmployeeComponent}></Route>
+              <Route path="/update-employee/:id" component={UpdateEmployeeComponent}></Route>
+              <Route path="/view-employee/:id" component={ViewEmployeeComponent}></Route>
+            </Switch>
+          
           </div>
-        </nav>
-        
-          
-            <div className="container">
-              <Routes>
-                <Route path = '/' element = { <ListEmployeeComponent /> }> </Route>
-                <Route path = '/employees' element = { <ListEmployeeComponent /> }> </Route>
-                <Route path = '/add-employee' element = { <CreateEmployeeComponent /> }> </Route>
-                {/* <Route path = '/update-employee/:id' element = { <UpdateEmployeeComponent /> }> </Route> */}
-              </Routes>
-            </div>
-          <FooterComponent/> 
-
-      </Router>      
+        </div>
+        <FooterComponent />
+      </Router>
     </div>
 
   );
