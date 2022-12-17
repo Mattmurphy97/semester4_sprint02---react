@@ -11,7 +11,7 @@ class ListEmployeeComponent extends Component {
         }
         this.addEmployee = this.addEmployee.bind(this);
         this.editEmployee = this.editEmployee.bind(this);
-        this.deleteEmployee = this.deleteEmployee.bind(this)
+        this.deleteEmployee = this.deleteEmployee.bind(this);
     }
 
     componentDidMount(){
@@ -52,7 +52,14 @@ class ListEmployeeComponent extends Component {
 
                 <div className='row'>
                     <button className='btn btn-secondary' onClick={this.addEmployee}>Add Employee</button>
-                    
+                </div>
+                <br />
+                <div className='h-100 d-flex align-items-center justify-content-center'>
+                    <h4><label>Search Employees: </label></h4>
+                    <br />
+                    <input type="text"  placeholder="Enter Name"/>
+                    <br />
+                    <button type='submit' onChange={"HERE GOES FUNCTION TO RETURN SEARCH RESULTS"}>Search</button>
                 </div>
                 <br />
 
@@ -76,14 +83,14 @@ class ListEmployeeComponent extends Component {
                                         <td>{employee.emailId}</td>
                                         <td>
                                             <button onClick = { ()=> this.viewEmployee(employee.id)} 
-                                            className="btn btn-success">View</button>
+                                            className="btn btn-outline-success">View</button>
                                             <span>   </span>
                                             <button onClick = { ()=> this.editEmployee(employee.id)} 
-                                            className="btn btn-success">Update</button>
+                                            className="btn btn-outline-warning">Update</button>
                                             <span>   </span>
 
                                             <button onClick = { ()=> this.deleteEmployee(employee.id)} 
-                                            className="btn btn-danger">Delete</button>
+                                            className="btn btn-outline-danger">Delete</button>
                                         </td>
 
 
